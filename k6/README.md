@@ -1,1 +1,1 @@
-# This folder should contain the k6 tests for the application
+# This folder contain the k6 tests for the application

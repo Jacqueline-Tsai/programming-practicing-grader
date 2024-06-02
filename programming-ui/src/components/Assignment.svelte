@@ -25,7 +25,6 @@
 
     const scoreRes = await fetch("/api/programming/scores/" + $userUuid);
     score = await scoreRes.json();
-    console.log(score);
   });
 
 </script>

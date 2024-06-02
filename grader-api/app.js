@@ -11,29 +11,25 @@ const handleSubmitAnswer = async (request) => {
   const req = await request.json();
   const assignmentId = await db.getUserNextAssignmentId(req.user_uuid);
   
-  const existSubmissionId = await db.findExistSubmission(assignmentId, req.answer);
+  const existSubmissionId = await db.findExistSubmission(assignmentId, req.answer); 
   if (existSubmissionId !== null && existSubmissionId !== undefined) {
     return Response.json({"status": "success", "id": existSubmissionId});
   }
 
   if (await db.getUserPendingSubmission(req.user_uuid) === true) {
-    return Response.json({"status": "failed", "msg": "You have ongoing submission. Try again later"});  
+    return Response.json({"status": "failed", "msg": "You have ongoing submission. Try again later"});
   }
 
   const newSubmissionId = await db.addNewSubmission(assignmentId, req.answer, req.user_uuid);
 
   const processRequest = async () => {
     try {
-      // setTimeout(async () => {
-      //   const testCode = await db.getTestCodebyId(assignmentId);
-      //   const result = await grade(req.answer, testCode);
-      //   const correct = result.split('\n')[result.split('\n').length-1]==='OK';
-      //   await db.updateSubmission(newSubmissionId, 'processed', result, correct);
-      // }, 5000);
-      const testCode = await db.getTestCodebyId(assignmentId);
-      const result = await grade(req.answer, testCode);
-      const correct = result.split('\n')[result.split('\n').length-1]==='OK';
-      await db.updateSubmission(newSubmissionId, 'processed', result, correct);
+      setTimeout(async () => {
+        const testCode = await db.getTestCodebyId(assignmentId);
+        const result = await grade(req.answer, testCode);
+        const correct = result.split('\n')[result.split('\n').length-1]==='OK';
+        await db.updateSubmission(newSubmissionId, 'processed', result, correct);
+      }, 5000);
     } catch (e) {
       console.error(e)
     }

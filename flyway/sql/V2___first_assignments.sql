@@ -45,3 +45,6 @@ class TestHello(unittest.TestCase):
 
 INSERT INTO programming_assignment_submissions (programming_assignment_id, code, user_uuid)
     VALUES (1, 'code', 'user') RETURNING id;
+
+INSERT INTO programming_assignment_submissions (programming_assignment_id, code, user_uuid)
+    VALUES (1, 'wrong answer', 'user') RETURNING id;

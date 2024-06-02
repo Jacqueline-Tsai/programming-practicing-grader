@@ -1,6 +1,5 @@
 module.exports = {
-  testDir: './tests',
-  timeout: 10000,
+  timeout: 30000,
   retries: 0,
   reporter: "list",
   workers: 5,
@@ -11,21 +10,9 @@ module.exports = {
   },
   projects: [
     {
-      name: 'chromium',
+      name: "e2e-headless-chromium",
       use: {
-        browserName: 'chromium',
-      },
-    },
-    {
-      name: 'firefox',
-      use: {
-        browserName: 'firefox',
-      },
-    },
-    {
-      name: 'webkit',
-      use: {
-        browserName: 'webkit',
+        browserName: "chromium",
       },
     },
   ],

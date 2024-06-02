@@ -48,8 +48,8 @@ const updateSubmission = async (id, _status, grader_feedback, correct) => {
     let dateStr = formatDate(date);
 
     await sql`UPDATE programming_assignment_submissions 
-        SET status=${_status}, grader_feedback=${grader_feedback}, correct=${correct}, last_updated=${dateStr}
-        WHERE id=${id};`
+      SET status=${_status}, grader_feedback=${grader_feedback}, correct=${correct}, last_updated=${dateStr}
+      WHERE id=${id};`
     ;
 }
 
@@ -72,7 +72,7 @@ const test = async () => {
     return result;
 }
 
-const findExistSubmission = async (assignmentId, code) => {
+const findExistSubmission = async (assignmentId, code) => { 
     const result = await sql`SELECT id 
       FROM programming_assignment_submissions
       WHERE programming_assignment_id=${assignmentId} AND code=${code}
